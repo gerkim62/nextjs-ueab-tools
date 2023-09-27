@@ -1,10 +1,10 @@
 import React from "react";
-import { CoursesPicker } from "../components/CoursesPicker";
+// import { CoursesPicker } from "../components/CoursesPicker";
 
 const ExamTimetable = () => {
   return (
-    <div>
-      <CoursesPicker />
+    <div>{"Exam Timetable"}
+      {/* <CoursesPicker /> */}
     </div>
   );
 };
