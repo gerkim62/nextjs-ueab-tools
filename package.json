@@ -13,16 +13,23 @@
     "@types/react": "18.2.22",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.16",
+    "bcryptjs": "^2.4.3",
     "eslint": "8.50.0",
     "eslint-config-next": "13.5.2",
+    "mongoose": "^7.5.3",
     "next": "13.5.2",
+    "next-auth": "^4.23.1",
     "postcss": "8.4.30",
     "puppeteer-core": "^19.7.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.11.0",
     "react-pro-sidebar": "^1.1.0-alpha.1",
+    "react-windowed-select": "^5.1.0",
     "tailwindcss": "3.3.3",
     "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.4"
   }
 }

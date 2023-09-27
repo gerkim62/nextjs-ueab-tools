@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import { Sidebar } from "./components/Sidebar";
+import { Footer } from "./components/Footer";
+import { AuthProvider } from "./Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,13 +20,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} flex`}>
-        <div className="flex">
-          <div className="h-screen overflow-y-auto w-full">
+      <body
+        className={`${inter.className} flex flex-col min-h-screen w-[100vw] overflow-x-hidden`}
+        style={{ display: "flex", flexDirection: "column" }}
+      >
+        <div className="flex flex-grow w-[100vw] ">
+          <div className="">
             <Sidebar />
           </div>
-          <div className="w-full">{children}</div>
+          <div
+            className="relative z-5 flex-1 flex-grow"
+            style={{ minHeight: "calc(100vh - 270px)" }}
+          >
+            {children}
+          </div>
         </div>
+        <Footer />
       </body>
     </html>
   );
