@@ -73,16 +73,17 @@ const UpdateExamTimetable = () => {
 
       {isError && <p className="text-red-500 text-sm my-2">{errorMessage}</p>}
       <button
-        className={`py-2 px-4 rounded font-semibold ${
-          selectedFile
-            ? "bg-pink-600 hover:bg-pink-700 text-white"
-            : "bg-gray-300 cursor-not-allowed text-gray-500"
-        }`}
-        onClick={handleUpload}
-        disabled={!selectedFile}
-      >
-        {selectedFile ? "Upload HTML Now" : "Choose a HTML File"}
-      </button>
+  className={`py-2 px-4 rounded font-semibold ${
+    selectedFile
+      ? "bg-pink-600 hover:bg-pink-700 text-white"
+      : "bg-gray-300 cursor-not-allowed text-gray-500"
+  }`}
+  onClick={handleUpload}
+  disabled={!selectedFile}
+>
+  {selectedFile ? "Upload HTML Now \u2191" : "Choose a file to upload"}
+</button>
+
 
       <Link
         href="/exam-timetable"
