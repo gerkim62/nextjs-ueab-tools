@@ -9,6 +9,8 @@ type Course = {
   building: string;
   venue: string;
   rows: string[];
+  page?: number;
+  options?: Course[];
 };
 
 type Header = string;

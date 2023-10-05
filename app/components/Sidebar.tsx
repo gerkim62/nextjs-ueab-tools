@@ -27,6 +27,10 @@ import {
   FaBars,
   FaTimes,
   FaBan,
+  FaBullhorn,
+  FaListUl,
+  FaFileDownload,
+  FaSearch,
 } from "react-icons/fa"; // Import the icons you need from react-icons
 
 import React from "react";
@@ -73,7 +77,7 @@ export const Sidebar = () => {
             <MenuItem
               onClick={() => setSidebarShowing(false)}
               component={<Link href={"/"}></Link>}
-              className="hover:bg-white"
+              className=""
             >
               <Logo />
             </MenuItem>
@@ -85,113 +89,84 @@ export const Sidebar = () => {
               <MenuItem
                 onClick={() => setSidebarShowing(false)}
                 component={<Link href={"/courses-selector"}></Link>}
-                icon={<FaPlayCircle className="text-pink-600" />}
+                icon={<FaSearch className="text-pink-600" />}
               >
                 Select courses
               </MenuItem>
               <MenuItem
                 onClick={() => setSidebarShowing(false)}
                 component={<Link href={"/courses-selector"}></Link>}
-                icon={<FaPlayCircle className="text-pink-600" />}
+                icon={<FaListUl className="text-pink-600" />}
               >
                 View selected
               </MenuItem>
               <MenuItem
                 onClick={() => setSidebarShowing(false)}
-                component={<Link href={"/courses-selector/how-to-use"}></Link>}
-                icon={<FaQuestionCircle className="text-pink-600" />}
-              >
-                How to Use
-              </MenuItem>
-              <MenuItem
-                onClick={() => setSidebarShowing(false)}
                 component={<Link href={"/courses-selector/limitations"}></Link>}
-                icon={<FaBan className="text-pink-600" />}
+                icon={<FaBullhorn className="text-pink-600" />}
               >
                 Learn more
               </MenuItem>
             </SubMenu>
             <SubMenu
-              icon={<FaClipboardCheck className="text-pink-600" />}
+              icon={<FaCalendar className="text-pink-600" />}
               label="Cute Timetable"
             >
               <MenuItem
                 onClick={() => setSidebarShowing(false)}
                 component={<Link href={"/cute-timetable"}></Link>}
-                icon={<FaPlayCircle className="text-pink-600" />}
+                icon={<FaFileDownload className="text-pink-600" />}
               >
                 Download now
               </MenuItem>
               <MenuItem
                 onClick={() => setSidebarShowing(false)}
                 component={<Link href={"/cute-timetable"}></Link>}
-                icon={<FaPlayCircle className="text-pink-600" />}
+                icon={<FaListUl className="text-pink-600" />}
               >
                 View timetable
               </MenuItem>
-              <MenuItem
-                onClick={() => setSidebarShowing(false)}
-                component={<Link href={"/cute-timetable/how-to-use"}></Link>}
-                icon={<FaQuestionCircle className="text-pink-600" />}
-              >
-                How to Use
-              </MenuItem>
             </SubMenu>
             <SubMenu
-              icon={<FaClipboard className="text-pink-600" />}
+              icon={<FaCalendar className="text-pink-600" />}
               label="Exam Timetable"
             >
               <MenuItem
                 component={<Link href={"/exam-timetable"}></Link>}
                 onClick={() => setSidebarShowing(false)}
-                icon={<FaPlayCircle className="text-pink-600" />}
+                icon={<FaFileDownload className="text-pink-600" />}
               >
-                Extract Now
+                Extract timetable
               </MenuItem>
               <MenuItem
-                component={<Link href={"/exam-timetable"}></Link>}
+                component={<Link href={"/exam-timetable/extracted"}></Link>}
                 onClick={() => setSidebarShowing(false)}
-                icon={<FaPlayCircle className="text-pink-600" />}
+                icon={<FaListUl className="text-pink-600" />}
               >
-                Learn more
-              </MenuItem>
-              <MenuItem
-                component={<Link href={"/exam-timetable/how-to-use"}></Link>}
-                onClick={() => setSidebarShowing(false)}
-                icon={<FaQuestionCircle className="text-pink-600" />}
-              >
-                How to Use
+                View extracted
               </MenuItem>
               <MenuItem
                 component={<Link href={"/exam-timetable/update"}></Link>}
                 onClick={() => setSidebarShowing(false)}
                 icon={<FaCode className="text-pink-600" />}
               >
-                Advanced
+                Advanced options
               </MenuItem>
             </SubMenu>
 
             <MenuItem
-              component={<Link href={"/about-me"}></Link>}
-              onClick={() => setSidebarShowing(false)}
-              icon={<FaInfoCircle className="text-pink-600" />}
-            >
-              About me
-            </MenuItem>
-            <MenuItem
-              component={<Link href={"/contact-me"}></Link>}
-              onClick={() => setSidebarShowing(false)}
-              icon={<FaEnvelope className="text-pink-600" />}
-            >
-              Contact me
-            </MenuItem>
-
-            <MenuItem
               component={<Link href={"/suggestions"}></Link>}
               onClick={() => setSidebarShowing(false)}
-              icon={<FaComments className="text-pink-600" />}
+              icon={<FaBullhorn className="text-pink-600" />}
             >
               Suggestions
+            </MenuItem>
+            <MenuItem
+              component={<Link href={"/about-me"}></Link>}
+              onClick={() => setSidebarShowing(false)}
+              icon={<FaUser className="text-pink-600" />}
+            >
+              About me
             </MenuItem>
           </Menu>
         </ProSidebar>
