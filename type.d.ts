@@ -18,9 +18,15 @@ type Page = {
   courses: Course[];
 };
 
-type Timetable = {
-    semester: string;
-    name: string;
-    pages: Page[];
-    releaseDate: Date;
-    };
+type ExamTimetable = {
+  semester: string;
+  name: string;
+  pages: Page[];
+  releaseDate: Date;
+};
+
+type CoursesPickerProps = {
+  courses: Course[];
+  options: Course[];
+  setOptions: React.Dispatch<React.SetStateAction<Course[]>>;
+};

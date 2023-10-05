@@ -27,7 +27,7 @@ export default function RootLayout({
             <Sidebar />
           </div>
           <div
-            className="relative z-5 flex-1 flex-grow"
+            className="relative z-5 flex-1 flex-grow min"
             style={{ minHeight: "calc(100vh - 270px)" }}
           >
             {children}

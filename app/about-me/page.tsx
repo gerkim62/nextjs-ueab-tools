@@ -1,77 +1,83 @@
 import React from 'react';
-import { FaHtml5, FaCss3, FaJs, FaReact, FaBootstrap, FaNodeJs, FaWhatsapp, FaEnvelope } from 'react-icons/fa';
-import { SiNextdotjs, SiMongodb, SiLinkedin } from 'react-icons/si';
+import { FaHtml5, FaCss3, FaJs, FaReact, FaBootstrap, FaNodeJs, FaWhatsapp, FaEnvelope, FaLinkedin } from 'react-icons/fa';
+import { SiNextdotjs, SiMongodb } from 'react-icons/si';
+import Logo from '../components/Logo';
 
 const AboutMe = () => {
   return (
-    <div className="bg-pink-500 py-10 px-6 md:px-12 lg:px-24 xl:px-32 2xl:px-48">
-      <div className="max-w-screen-lg mx-auto flex flex-col lg:flex-row items-center justify-center">
-        <div className="flex-shrink-0">
+    <section className="bg-white min-h-full flex flex-col justify-center py-12 px-4 md:px-12 lg:px-24 xl:px-32 2xl:px-48 text-center">
+      <div className="max-w-screen-lg mx-auto flex flex-col lg:flex-row items-center justify-center space-y-6 lg:space-y-0">
+        <div className="relative flex-shrink-0 w-40 h-40 lg:w-48 lg:h-48">
+          <div className="absolute -inset-2 bg-pink-500 rounded-full" />
           <img
             src="your_profile_pic_url.jpg"
             alt="Profile Pic"
-            className="w-32 h-32 rounded-full border-4 border-white"
+            className="w-full h-full rounded-full object-cover ring-4 ring-pink-500"
           />
         </div>
         <div className="mt-6 lg:mt-0 lg:ml-10 text-center lg:text-left">
-          <h1 className="text-3xl font-semibold text-white">developer.gerison</h1>
-          <div className="flex items-center mt-4 space-x-4">
-            <TechIcon icon={<FaHtml5 />} text="HTML" />
-            <TechIcon icon={<FaCss3 />} text="CSS" />
-            <TechIcon icon={<FaJs />} text="JavaScript" />
-            <TechIcon icon={<SiNextdotjs />} text="Next.js" />
-            <TechIcon icon={<FaReact />} text="React" />
-            <TechIcon icon={<FaBootstrap />} text="Bootstrap" />
-            <TechIcon icon={<FaNodeJs />} text="Node.js" />
-            <TechIcon icon={<SiMongodb />} text="MongoDB" />
+          <h1 className="font-mono lg:text-xl font-semibold text-gray-800 text-center">developer.gerison</h1>
+          {/* <Logo /> */}
+          <div className="flex flex-wrap justify-center lg:justify-start m-4 space-x-4 ">
+            <TechIcon icon={<FaHtml5 className="text-4xl text-pink-500" />} text="HTML5" />
+            <TechIcon icon={<FaCss3 className="text-4xl text-pink-500" />} text="CSS3" />
+            <TechIcon icon={<FaJs className="text-4xl text-pink-500" />} text="JavaScript" />
+            <TechIcon icon={<SiNextdotjs className="text-4xl text-pink-500" />} text="Next.js" />
+            <TechIcon icon={<FaReact className="text-4xl text-pink-500" />} text="React" />
+            <TechIcon icon={<FaBootstrap className="text-4xl text-pink-500" />} text="Bootstrap" />
+            <TechIcon icon={<FaNodeJs className="text-4xl text-pink-500" />} text="Node.js" />
+            <TechIcon icon={<SiMongodb className="text-4xl text-pink-500" />} text="MongoDB" />
           </div>
-          <p className="text-white mt-4">
-            I am a Software Engineering BSc student at the University of Eastern Africa, Baraton.
-          </p>
+          <div className="bg-pink-000 p-4 rounded-lg mt-6 text-gray-800">
+            <h2 className="text-lg font-semibold mb-2">About Me</h2>
+            <p className="text-sm lg:text-base tracking-wide">
+              I specialize in front-end web development with a focus on creating responsive and user-friendly interfaces. My tech stack includes HTML5, CSS3, JavaScript, React, NextJS and Bootstrap. I also have experience with server-side development using Node.js, ExpressJS and MongoDB for database management. My goal is to build innovative and efficient web applications that deliver exceptional user experiences.
+            </p>
+          </div>
           <div className="mt-6">
             <ContactInfo />
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
 const TechIcon = ({ icon, text }) => {
   return (
-    <div className="flex items-center">
+    <div className="flex items-center mb-2 lg:mb-0 lg:mr-4 shadow p-1 rounded">
       {icon}
-      <span className="ml-2 text-white">{text}</span>
+      <span className="ml-2 text-gray-800 text-xl lg:text-2xl">{text}</span>
     </div>
   );
 };
 
 const ContactInfo = () => {
   return (
-    <div className="flex items-center space-x-6">
+    <div className="flex items-center justify-center space-x-6 mt-4">
       <a
         href="mailto:your.email@example.com"
-        className="text-white hover:text-pink-300"
+        className="text-gray-800 hover:text-pink-500"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FaEnvelope /> Email
+        <FaEnvelope />
       </a>
       <a
         href="https://wa.me/your-whatsapp-number"
-        className="text-white hover:text-pink-300"
+        className="text-gray-800 hover:text-pink-500"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <FaWhatsapp /> WhatsApp
+        <FaWhatsapp />
       </a>
       <a
         href="https://linkedin.com/in/your-linkedin-profile"
-        className="text-white hover:text-pink-300"
+        className="text-gray-800 hover:text-pink-500"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <SiLinkedin /> LinkedIn
+        <FaLinkedin />
       </a>
     </div>
   );

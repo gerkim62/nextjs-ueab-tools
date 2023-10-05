@@ -1,67 +1,11 @@
-"use client";
-
-import React, { useEffect, useState, useRef, useTransition } from "react";
-// import Select from "react-select";
+import React from "react";
 import Select, { createFilter } from "react-windowed-select";
 
-import OptionSelection from "./OptionSelection";
-import useLocalStorage from "../hooks/useLocalStorage";
-const CoursesPicker = ({
-  courses,
-  options,
-  setOptions,
-}: CoursesPickerProps) => {
-  const [isPending, startTransition] = useTransition();
-
-  // function capitalize(word) {
-  //   return word.charAt(0).toUpperCase() + word.slice(1);
-  // }
-
-  useEffect(() => {
-    if (options) {
-      setIsPickerDisabled(true);
-    } else {
-      setIsPickerDisabled(false);
-
-      //give time to remove disabled first
-
-      // Make sure selectRef.current is not null or undefined before calling focus
-      setTimeout(() => selectRef.current?.focus(), 0);
-    }
-  }, [options]);
-
-  //give displayedPropert a type of "code" | "title"
-  const [displayedProperty, setDisplayedProperty] = useState<"code" | "title">(
-    "code"
-  );
-  const [isPickerDisabled, setIsPickerDisabled] = useState(false);
-  const [selectedCourses, setSelectedCourses] = useLocalStorage<Course[]>(
-    "selectedCourses",
-    []
-  );
-  // const properties = ["code", "title"];
-  const shakingDurationInMs = 450;
-  const selectRef: React.RefObject<HTMLSelectElement> = useRef(null);
-  const [isShaking, setIsShaking] = useState(false);
-
-  const courseOptions = isPending
-    ? []
-    : courses
-        .map((course) => ({
-          value: course.code,
-          label: course[displayedProperty] + ": " + course.title,
-        }))
-        .sort((a, b) =>
-          a.label
-            .substring(a.label.indexOf(": ") + 2)
-            .toLowerCase()
-            .localeCompare(
-              b.label.substring(b.label.indexOf(": ") + 2).toLowerCase()
-            )
-        );
-
-  console.log(courseOptions.length);
-
+const PickExamCourses = ({
+  examTimetable,
+}: {
+  examTimetable: ExamTimetable;
+}) => {
   return (
     <div className="pt-2 p-4 max-w-2xl mx-auto">
       <p className="mb-3">
@@ -185,4 +129,4 @@ const CoursesPicker = ({
   );
 };
 
-export { CoursesPicker };
+export default PickExamCourses;

@@ -163,7 +163,7 @@ export const Sidebar = () => {
                 How to Use
               </MenuItem>
               <MenuItem
-               component={<Link href={"/exam-timetable/update"}></Link>}
+                component={<Link href={"/exam-timetable/update"}></Link>}
                 onClick={() => setSidebarShowing(false)}
                 icon={<FaCode className="text-pink-600" />}
               >
@@ -172,14 +172,14 @@ export const Sidebar = () => {
             </SubMenu>
 
             <MenuItem
-             component={<Link href={"/about-me"}></Link>}
+              component={<Link href={"/about-me"}></Link>}
               onClick={() => setSidebarShowing(false)}
               icon={<FaInfoCircle className="text-pink-600" />}
             >
               About me
             </MenuItem>
             <MenuItem
-             component={<Link href={"/contact-me"}></Link>}
+              component={<Link href={"/contact-me"}></Link>}
               onClick={() => setSidebarShowing(false)}
               icon={<FaEnvelope className="text-pink-600" />}
             >
@@ -187,18 +187,11 @@ export const Sidebar = () => {
             </MenuItem>
 
             <MenuItem
-             component={<Link href={"/suggestions"}></Link>}
+              component={<Link href={"/suggestions"}></Link>}
               onClick={() => setSidebarShowing(false)}
               icon={<FaComments className="text-pink-600" />}
             >
               Suggestions
-            </MenuItem>
-            <MenuItem
-             component={<Link href={"/bug-report"}></Link>}
-              onClick={() => setSidebarShowing(false)}
-              icon={<FaExclamationTriangle className="text-pink-600" />}
-            >
-              Report a bug
             </MenuItem>
           </Menu>
         </ProSidebar>

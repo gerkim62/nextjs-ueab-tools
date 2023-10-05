@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
-    const { timetable }: { timetable: Timetable } = await request.json();
+    const { timetable }: { timetable: ExamTimetable } = await request.json();
 
     //if release date is greater than today's date, return error
     const today = new Date();
@@ -29,10 +29,7 @@ export async function POST(request: Request) {
     await connectMongoDB();
 
     // Check if a timetable with the same semester and name exists
-    const existingTimetable = await ExamTimetable.findOne({
-      semester: timetable.semester,
-      name: timetable.name,
-    });
+    const existingTimetable = await ExamTimetable.findOne({});
 
     if (existingTimetable) {
       // If a timetable with the same semester and name exists, check the release date

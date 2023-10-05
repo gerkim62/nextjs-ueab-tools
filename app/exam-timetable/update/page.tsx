@@ -50,11 +50,18 @@ const UpdateExamTimetable = () => {
 
   const handleUpload = async () => {
     if (selectedFile) {
+      //if the filename not ends with .html, return null
+      if (!selectedFile.name.endsWith(".html")) {
+        setIsError(true);
+        setErrorMessage("Invalid file type. Please upload a valid HTML file");
+        return;
+      }
+
       console.log("Uploading file:", selectedFile);
       const document = await readFileAsDocument(selectedFile);
       if (!document) {
         setIsError(true);
-        setErrorMessage("Error reading file");
+        setErrorMessage("Error reading file. Is it a valid HTML file?");
         return;
       }
 
