@@ -34,10 +34,10 @@ export default function Home() {
       {/* App 1: Download Cute Timetable */}
       <div className="bg-white p-6 rounded-lg text-left">
         <h2 className="text-pink-500 text-xl font-semibold mb-4">
-          1. Cute Courses Timetable
+          1. Cute class Timetable
         </h2>
         <p className="text-gray-700">
-          Easily download and manage your class schedules using the cute
+          Easily download and manage your class Timetable using the cute
           timetable app.
         </p>
         <Link className=" text-pink-600 hover:underline hover:text-pink-700  font-semibold transition duration-300 underline" href={'/cute-timetable'}>Launch cute timetable</Link>
@@ -45,7 +45,7 @@ export default function Home() {
   
       {/* App 2: Extract Exam Timetable */}
       <div className="bg-white px-6 pt-6  text-left">
-        <h2 className="text-pink-500 text-xl font-semibold mb-4">
+        <h2 className="text-pink-500 text-lg font-semibold mb-4">
           2. Exam Timetable Extractor
         </h2>
         <p className="text-gray-700">
@@ -61,7 +61,7 @@ export default function Home() {
           3. Easy Courses Selector
         </h2>
         <p className="text-gray-700">
-          Automatically chooses your courses without having to deal with clashing courses.
+          Automatically chooses your courses without having to deal with clashing courses. You can choose which lecturers to avoid as well as which time you prefer.
         </p>
         <Link className=" text-pink-600 hover:underline hover:text-pink-700  font-semibold transition duration-300 underline" href={'/courses-selector'}>Select your courses</Link>
       </div>
