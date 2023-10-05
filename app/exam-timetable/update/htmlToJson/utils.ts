@@ -1,4 +1,4 @@
-export function toCamelCase(str) {
+export function toCamelCase(str:string) {
     // Split the string by non-alphanumeric characters
     const words = str.split(/[^a-zA-Z0-9]/);
   
@@ -16,11 +16,11 @@ export function toCamelCase(str) {
   }
   
   // Helper function to capitalize the first letter of a word
-  function capitalize(word) {
+  function capitalize(word:string) {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }
   
-  export function sanitizeString(str) {
+  export function sanitizeString(str:string) {
     // Remove leading and trailing spaces
     let sanitizedString = str.trim();
   
