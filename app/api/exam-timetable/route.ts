@@ -3,6 +3,7 @@ import ExamTimetable from "@/app/models/examTimetable";
 import { NextResponse } from "next/server";
 
 export async function GET() {
+  console.log("Getting timetables...");
   try {
     await connectMongoDB();
 

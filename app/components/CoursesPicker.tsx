@@ -35,6 +35,7 @@ const CoursesPicker = ({
         );
   return (
     <Select
+      isClearable={false}
       onFocus={() => startTransition(() => {})}
       onInputChange={() => startTransition(() => {})}
       isLoading={isPending}

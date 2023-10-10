@@ -8,18 +8,28 @@ import useFetch from "../hooks/useFetch";
 import React, { useEffect, useState } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { useSession } from "next-auth/react";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 // import { CoursesPicker } from "../components/CoursesPicker";
 
 const ExamTimetable = () => {
+  const router = useRouter();
   const [selectedExamCourses, setSelectedExamCourses] = useLocalStorage(
     "selectedExamCourses",
     []
   );
+  const [extractingExamTimetable, setExtractingExamTimetable] = useState(false);
   const [selectedExamCourseIds, setSelectedExamCourseIds] = useLocalStorage(
     "selectedExamCourseIds",
     []
   );
   const [allExamCourses, setAllExamCourses] = useState([]);
+
+  //for storing the current course in which uyser is selecting the option for
+  const [selectingOptionFor, setSelectingOptionFor] = useLocalStorage(
+    "selectingOptionFor",
+    ""
+  );
   const shakingDurationInMs = 500;
 
   const noCourseSelected = () =>
@@ -45,15 +55,96 @@ const ExamTimetable = () => {
   const handCourseChange = (newValue: unknown, actionMeta: any) => {
     console.log(newValue);
     const ids = (newValue as any).map((item: any) => item.value);
-    // console.log(ids);
+    console.log(ids);
     setSelectedExamCourseIds(ids);
   };
 
+  const handleCoursesSubmit = async () => {
+    setExtractingExamTimetable(true);
+    if (selectedExamCourseIds.length <= 0) {
+      setExtractingExamTimetable(false);
+      setSelectedExamCourses([]);
+      noCourseSelected();
+    } else {
+      const selectedCoursesOptions = allExamCourses
+        .filter((course) => selectedExamCourseIds.includes(course.code))
+        .map((course) => {
+          return course.options;
+        });
+
+      const selected = [];
+      for (let i = 0; i < selectedCoursesOptions.length; i++) {
+        const options = selectedCoursesOptions[i];
+        if (options.length > 1) {
+          const selectedOption = await chooseCourseOption(options);
+          console.log(selectedOption, `selected option`);
+          selected.push(selectedOption);
+        } else {
+          selected.push(options[0]);
+        }
+      }
+
+      console.log(selected, `selected courses`);
+
+      setSelectedExamCourses(selected);
+      router.push("/exam-timetable/extracted");
+      
+    }
+   
+  };
+
+  // Function to display the course selection prompt and return the selected course object
+  async function chooseCourseOption(courses) {
+    return new Promise((resolve, reject) => {
+      const optionLabels = courses.map(
+        (course, index) => `Option ${course.group} by ${course.instructor}`
+      );
+      const title = `${courses[0].title} - ${courses[0].code}`;
+
+      Swal.fire({
+        title: `${courses[0].code}`,
+        text: `Select your option for ${title}`,
+        input: "select",
+        inputOptions: Object.assign(
+          {},
+          ...optionLabels.map((label, index) => ({ [index]: label }))
+        ),
+        inputPlaceholder: "Click to select",
+        inputValidator: (value) => {
+          if (value === "") {
+            return "You must select an option";
+          }
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const selectedIndex = parseInt(result.value);
+          resolve(courses[selectedIndex]);
+        } else {
+          Swal.fire("Option selection canceled", "", "info");
+          reject("Selection canceled"); // Reject the promise if the selection is canceled
+        }
+      });
+    });
+  }
+
   return (
     <div className="h-full w-full">
-      {error && <div className="text-red-500">{error}</div>}
+      {error && (
+        <div className="bg-white text-pink-500 p-4 rounded-lg">
+          <div className="text-red-500">
+            An Error has occurred. Please reload the page.
+          </div>
+          <button
+            className="bg-white text-pink-500 border border-pink-500 px-3 py-1 rounded-md ml-2"
+            onClick={() => window.location.reload()}
+          >
+            Reload
+          </button>
+        </div>
+      )}
+
       {loading && <Loading />}
-      {allExamCourses.length>0 && (
+      {allExamCourses.length > 0 && (
         <div className=" flex flex-col flex-wrap items-center gap-1 mt-12 max-w-md mx-auto text-center">
           <h2
             className={`text-xl font-bold mb-0 text-pink-500 ${
@@ -68,20 +159,18 @@ const ExamTimetable = () => {
           <CoursesPicker
             onCoursesChange={handCourseChange}
             coursesToSelect={allExamCourses}
+            defaultSelectedCourses={selectedExamCourses}
           />
           <button
-            // disabled={selectedCourses.length < 1}
-            onClick={() => {
-              if (selectedExamCourseIds.length <= 0) {
-                noCourseSelected();
-              } else {
-                setSelectedExamCourses(selectedExamCourseIds);
-                // console.log(selectedExamCourseIds);
-              }
-            }}
-            className="mt-5 border p-2 rounded-md bg-pink-500 text-white shadow-sm flex items-center gap-1"
+            disabled={extractingExamTimetable}
+            onClick={handleCoursesSubmit}
+            className={`mt-5 border p-2 rounded-md ${
+              extractingExamTimetable ? "bg-gray-400" : "bg-pink-500"
+            } text-white shadow-sm flex items-center gap-1`}
           >
-            Extract Exam Timetable
+            {extractingExamTimetable
+              ? "Extracting Exam Timetable..."
+              : "Extract Exam Timetable"}
             <svg
               fill="white"
               xmlns="http://www.w3.org/2000/svg"

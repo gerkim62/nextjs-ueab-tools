@@ -1,15 +1,26 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import getTimetableFromUploadedHtml from "./htmlToJson";
+import toast from "react-hot-toast";
 
 const UpdateExamTimetable = () => {
+  const onError = (message: string) => toast.error(message, {});
+
+  const onSuccess = (message: string) => toast.success(message, {});
+
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [uploading, setUploading] = useState(false);
+
+  useEffect(() => {
+    if (isError) {
+      onError(errorMessage);
+    }
+  }, [isError]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -53,7 +64,7 @@ const UpdateExamTimetable = () => {
       //if the filename not ends with .html, return null
       if (!selectedFile.name.endsWith(".html")) {
         setIsError(true);
-        setErrorMessage("Invalid file type. Please upload a valid HTML file");
+        setErrorMessage("Only HTML files are allowed");
         return;
       }
 
@@ -89,7 +100,8 @@ const UpdateExamTimetable = () => {
         if (response.ok) {
           setIsError(false);
           setErrorMessage("");
-          alert("Timetable updated successfully" + data.message);
+          // alert("Timetable updated successfully" + data.message);
+          onSuccess("Timetable updated successfully");
         } else {
           setIsError(true);
           setErrorMessage(data.message);
@@ -118,6 +130,7 @@ const UpdateExamTimetable = () => {
         <li>
           Go to{" "}
           <a
+            target="_blank"
             className="text-pink-600 mt-4 hover:underline hover:text-pink-700 capitalize font-semibold transition duration-300 underline"
             href="https://xodo.com/convert-pdf-to-html"
           >
