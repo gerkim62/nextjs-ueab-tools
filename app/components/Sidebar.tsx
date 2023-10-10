@@ -105,7 +105,7 @@ export const Sidebar = () => {
                 component={<Link href={"/courses-selector/limitations"}></Link>}
                 icon={<FaBullhorn className="text-pink-600" />}
               >
-                Learn more
+                Limitations
               </MenuItem>
             </SubMenu>
             <SubMenu

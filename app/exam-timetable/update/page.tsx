@@ -133,7 +133,7 @@ const UpdateExamTimetable = () => {
         htmlFor="fileInput"
         className="block font-medium mt-10 mb-2 text-gray-700"
       >
-        Upload the conveted file here
+        Upload the converted file here
       </label>
       <div className="flex items-center border rounded-lg overflow-hidden mb-5 max-w-[80%]">
         <label

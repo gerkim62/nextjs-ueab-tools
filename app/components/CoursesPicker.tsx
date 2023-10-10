@@ -5,15 +5,17 @@ type CoursesPickerProps = {
   coursesToSelect: Course[];
   defaultSelectedCourses?: Course[];
   onCoursesChange?: (newValue: unknown, actionMeta: any) => void;
+  readonly ref?: React.Ref<typeof Select>;
 };
 
 const CoursesPicker = ({
+  ref,
   coursesToSelect,
-  defaultSelectedCourses=[],
+  defaultSelectedCourses = [],
   onCoursesChange,
 }: CoursesPickerProps) => {
   const [isPending, startTransition] = useTransition();
-  const selectRef = useRef(null);
+  const selectRef = ref || useRef(null);
   const isPickerDisabled = false;
   const displayedProperty: "code" | "title" = "code";
   const options = isPending
@@ -55,7 +57,34 @@ const CoursesPicker = ({
       isDisabled={isPickerDisabled}
       autoFocus
       name="courses"
-      className=" flex-grow mr-4"
+      theme={(theme) => {
+        // console.log("theme", theme);
+
+        return {
+          ...theme,
+          borderRadius: 5,
+          colors: {
+            ...theme.colors,
+            primary: "#FF69B4", // Pink primary color
+            primary75: "#FF85A1", // Lighter pink
+            primary50: "#FFA6C9", // Even lighter pink
+            primary25: "#FFD9EE", // Very light pink
+            danger: "#DE350B", // Red for danger
+            dangerLight: "#FFBDAD", // Lighter red
+            neutral0: "#FFFFFF", // White background
+            neutral5: "#F5F5F5", // Slightly off-white
+            neutral10: "#E6E6E6", // Even lighter off-white
+            neutral20: "#CCCCCC", // Light gray
+            neutral30: "#B3B3B3", // Slightly darker gray
+            neutral40: "#999999", // Gray
+            neutral50: "#7F7F7F", // Darker gray
+            neutral60: "#666666", // Even darker gray
+            neutral70: "#4C4C4C", // Very dark gray
+            neutral80: "#333333", // Almost black
+            neutral90: "#1A1A1A", // Deep black
+          },
+        };
+      }}
       classNamePrefix="select"
       onChange={onCoursesChange}
     />
