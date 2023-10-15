@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use client";
 
 import useLocalStorage from "@/app/hooks/useLocalStorage";

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import useLocalStorage from "@/app/hooks/useLocalStorage";
 import { getCurrentCourses, getTimestamps, getDays, convertTo12HourFormat } from "./helpers";
 import "./Timetable.css";

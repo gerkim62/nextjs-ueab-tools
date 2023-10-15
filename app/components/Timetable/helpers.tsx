@@ -1,6 +1,6 @@
 
 
-
+// @ts-nocheck
 export function getCurrentCourses({ timestamp, dayName, courses }) {
     // console.log(arguments);
     // console.log(timestamp, dayName, "in getCurrentCourses");

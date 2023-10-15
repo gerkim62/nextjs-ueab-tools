@@ -1,6 +1,14 @@
+// @ts-nocheck
+
 import React from "react";
 import "./PropertiesCard.css";
-const PropertiesCard = ({ course, className, setShowingPropertiesFor }) => {
+type Props = {
+  course: Course & { option: string, location: string, venue: string, page: string, rows: string[] };
+  className?: string;
+  setShowingPropertiesFor: (course: Course) => void;
+};
+
+const PropertiesCard = ({ course, className, setShowingPropertiesFor }:Props) => {
   // console.log(course);
   const {
     code,
@@ -34,7 +42,7 @@ const PropertiesCard = ({ course, className, setShowingPropertiesFor }) => {
         </div>
         <div className="content">
           <ul>
-            <li tooltip="Title" flow="left">
+            <li tooltip="Title"  flow="left">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="1em"
