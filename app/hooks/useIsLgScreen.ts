@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 const LG_SCREEN_BREAKPOINT = 1024;
 
 const useIsLgScreen = () => {
+  if (typeof window === "undefined") return false;
   const [isLgScreen, setIsLgScreen] = useState(
     window.matchMedia(`(min-width: ${LG_SCREEN_BREAKPOINT}px)`).matches
   );
