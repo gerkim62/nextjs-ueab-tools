@@ -11,7 +11,7 @@ function Limitations() {
       </ul>
  
       <div className="bg-white p-4 rounded-lg">
-        <p className="text-black text-sm text-center">While the Course Selector is a valuable tool for academic planning, it's essential to be aware of its limitations. It cannot account for prerequisites, access your bulletin, or track your previous courses.</p>
+        <p className="text-black text-sm text-center">While the Course Selector is a valuable tool for academic planning, it&#39;s essential to be aware of its limitations. It cannot account for prerequisites, access your bulletin, or track your previous courses.</p>
       </div>
     </div>
   );

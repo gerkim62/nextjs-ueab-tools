@@ -95,7 +95,7 @@ const CuteTimetablePage = () => {
   ) : (
     <div className="-mt-10 p-6 rounded-lg text-black text-center flex flex-col  justify-center items-center min-h-full">
       <p className="text-xl font-bold mb-2">
-        You haven't uploaded your timetable yet
+        You haven&#39;t uploaded your timetable yet
       </p>
       <p className="text-lg mb-4 max-w-lg">
         To view your courses timetable, please click the button below and follow

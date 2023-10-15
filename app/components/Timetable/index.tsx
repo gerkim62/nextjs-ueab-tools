@@ -1,7 +1,7 @@
 import useLocalStorage from "@/app/hooks/useLocalStorage";
 import { getCurrentCourses, getTimestamps, getDays, convertTo12HourFormat } from "./helpers";
 import "./Timetable.css";
-import { forwardRef, useState } from "react";
+import {  useState } from "react";
 import { useFullscreen } from "@/app/hooks/useFullscreen";
 import Link from "next/link";
 import {
@@ -24,7 +24,7 @@ type Props = {
   updateUrlLabel?:string;
 };
 
-const Timetable = forwardRef(
+const Timetable = (
   ({
     courses,
     // title,
@@ -227,5 +227,7 @@ const Timetable = forwardRef(
     );
   }
 );
+
+Timetable.displayName = "Timetable";
 
 export default Timetable;

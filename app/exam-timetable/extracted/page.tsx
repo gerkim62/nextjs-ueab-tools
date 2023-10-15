@@ -95,7 +95,7 @@ const ViewExtracted = () => {
     <div className="-mt-10 p-6 rounded-lg text-black text-center flex flex-col  justify-center items-center min-h-full">
       <p className="text-xl font-bold mb-2">Select your Courses First</p>
       <p className="text-lg mb-4 max-w-lg">
-        You haven't selected any courses yet. To view your exam timetable,
+        You haven&#39;t selected any courses yet. To view your exam timetable,
         please click the button below and choose your courses.
       </p>
       <Link

@@ -20,7 +20,7 @@ const UpdateExamTimetable = () => {
     if (isError) {
       onError(errorMessage);
     }
-  }, [isError]);
+  }, [isError, errorMessage]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
