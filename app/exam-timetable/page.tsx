@@ -1,7 +1,7 @@
 "use client";
 import toast, { Toaster } from "react-hot-toast";
 
-import {relativeTimeFromDates} from "/lib/relativeTimeFromDates"
+import { relativeTimeFromDates } from "/lib/relativeTimeFromDates";
 
 import CoursesPicker from "../components/CoursesPicker";
 import Loading from "../components/Loading";
@@ -13,6 +13,7 @@ import { useSession } from "next-auth/react";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import useExpiringLocalStorage from "../hooks/useExpiringLocalStorage";
 // import { CoursesPicker } from "../components/CoursesPicker";
 
 const ExamTimetable = () => {
@@ -29,15 +30,14 @@ const ExamTimetable = () => {
 
   const formatDate = (date: Date) => {
     return date.toLocaleDateString("en-GB", {
-     
       day: "2-digit",
       month: "2-digit",
       year: "numeric",
     });
-  }
+  };
+  
 
-  const [allExamCourses, setAllExamCourses] = useState([]);
-
+  
   //for storing the current course in which uyser is selecting the option for bbbbbbbbbbb
   const [selectingOptionFor, setSelectingOptionFor] = useLocalStorage(
     "selectingOptionFor",
@@ -62,6 +62,13 @@ const ExamTimetable = () => {
 
   const isShaking = false;
   //use the useFetch hook to fetch the exam timetable
+
+  const [allExamCourses, setAllExamCourses] = useExpiringLocalStorage(
+    `allExamCourses`,
+    [],
+    7 * 24 * 60 * 60 * 1000
+  );
+
   const {
     data: examTimetable,
     error,
@@ -85,8 +92,8 @@ const ExamTimetable = () => {
       const semester = timetable.semester;
       setSemester(semester);
       setTimetableName(timetable.name);
-      setExpiryDate((endDate));
-      setReleaseDate((new Date(timetable.releaseDate)));
+      setExpiryDate(endDate);
+      setReleaseDate(new Date(timetable.releaseDate));
 
       //check if the exam timetable is for the current semester
       const today = new Date();
@@ -110,13 +117,12 @@ const ExamTimetable = () => {
   };
 
   const handleCoursesSubmit = async () => {
-    if(isExpired){
+    if (isExpired) {
       Swal.fire({
         icon: "warning",
         title: "Oops...",
         text: "This timetable is not up-to-date.",
-      }); 
-   
+      });
     }
     setExtractingExamTimetable(true);
     if (selectedExamCourseIds.length <= 0) {
@@ -241,12 +247,16 @@ const ExamTimetable = () => {
         </div>
       )}
       <div className="bg-white rounded-lg p-4">
-        {(isExpired && !loading) ? (
+        {isExpired && !loading ? (
           <div className="text-center text-pink-600">
-            
             <p className="text-sm text-gray-600 mb-1">
-              Expired timetable: <br/>
-            The {timetableName} for {semester} <span className="font-bold"> expired {relativeTimeFromDates(expiryDate)}</span> .
+              Expired timetable: <br />
+              The {timetableName} for {semester}{" "}
+              <span className="font-bold">
+                {" "}
+                expired {relativeTimeFromDates(expiryDate)}
+              </span>{" "}
+              .
             </p>
             <p className="text-sm text-gray-600">
               It was released on {relativeTimeFromDates(releaseDate)}.
@@ -260,9 +270,8 @@ const ExamTimetable = () => {
           </div>
         ) : (
           <div className="text-center text-pink-600">
-            
             <p className="text-sm text-gray-600 mb-4">
-              You are viewing <br/> The {timetableName} for {semester}.
+              You are viewing <br /> The {timetableName} for {semester}.
             </p>
             {/* <p className="text-sm text-gray-600">
               It was released on {relativeTimeFromDates(releaseDate)}.

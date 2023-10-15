@@ -11,33 +11,42 @@ const CuteTimetableTutorial = () => {
 
         <div className="bg-white rounded-lg p-6 shadow-md text-left mb-8">
           <p className="text-gray-600 mb-4">
-            Follow these simple steps to download your timetable as a CSV file:
+            Follow these simple steps to access your timetable CSV file:
           </p>
 
           <div className="mb-4">
             <p className="text-gray-600 font-semibold mb-2">
-              1. Download Your Timetable
+              1. Log in to UMIS
             </p>
             <p>
-              <a target="_blank" href="https://registration.ueab.ac.ke/ueab/grid_export?view=28:0&action=export" className="text-pink-600 hover:underline font-semibold block mb-2">
-                Click here to download your timetable CSV
+              <a target="_blank" href="https://registration.ueab.ac.ke/ueab/a_students.jsp?view=1:0" className="text-pink-600 hover:underline font-semibold block mb-2">
+                Click here to log in to UMIS portal
               </a>
-               If it redirects you to the login page, don't worry; just log in
-              and return here to click the link again.
+              This link will take you to the UMIS login page. Log in with your student ID and password then return to this page to continue to the next step.
             </p>
           </div>
 
           <div>
             <p className="text-gray-600 font-semibold mb-4">
-              2. Go back to Upload
+              2. Download Your Timetable
+            </p>
+            <p>
+              <a target="_blank" href="https://registration.ueab.ac.ke/ueab/grid_export?view=28:0&action=export" className="text-pink-600 hover:underline font-semibold block mb-2">
+                Click here to download your timetable CSV
+              </a>
+              After logging in, click the above link to download your timetable as a CSV file.
+            </p>
+          </div>
+
+          <div>
+            <p className="text-gray-600 font-semibold mb-4">
+              3. Go back to Upload
             </p>
             <Link href="/cute-timetable" className="text-pink-600 hover:underline font-semibold block mb-2">
-                Click here to go back to the upload page
-              </Link>
+              Click here to go back to the upload page
+            </Link>
             <p>
-              After downloading the CSV file, click the
-              above link
-              to go to the upload page and upload your timetable.
+              After downloading the CSV file, click the above link to return to the upload page and upload your timetable.
             </p>
           </div>
         </div>

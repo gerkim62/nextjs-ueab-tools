@@ -1,5 +1,5 @@
 import useLocalStorage from "@/app/hooks/useLocalStorage";
-import { getCurrentCourses, getTimestamps, getDays } from "./helpers";
+import { getCurrentCourses, getTimestamps, getDays, convertTo12HourFormat } from "./helpers";
 import "./Timetable.css";
 import { forwardRef, useState } from "react";
 import { useFullscreen } from "@/app/hooks/useFullscreen";
@@ -88,8 +88,8 @@ const Timetable = forwardRef(
                 {/* top header row of timestamps */}
                 {topHeaders.map((timestamp) => (
                   <th key={`${timestamp.start}-${timestamp.end}`}>
-                    <p key={timestamp.start}>{timestamp.start}</p>
-                    <p key={timestamp.end}>{timestamp.end}</p>
+                    <p key={timestamp.start}>{ convertTo12HourFormat(timestamp.start)}</p>
+                    <p key={timestamp.end}>{ convertTo12HourFormat(timestamp.end)}</p>
                   </th>
                 ))}
               </tr>

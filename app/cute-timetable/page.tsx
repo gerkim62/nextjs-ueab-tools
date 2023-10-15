@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { getCSVStringFrom } from "./helpers";
 import useLocalStorage from "../hooks/useLocalStorage";
+import { useRouter } from "next/navigation";
 
 const CsvTimetableUploader = () => {
   const onError = (message: string) => toast.error(message, {});
@@ -19,6 +20,7 @@ const CsvTimetableUploader = () => {
     "timetableCsv",
     ""
   );
+  const router = useRouter();
 
   useEffect(() => {
     if (isError) {
@@ -56,8 +58,9 @@ const CsvTimetableUploader = () => {
 
       setUploading(false);
       onSuccess("File uploaded successfully");
-
-      window.location.href = "/cute-timetable/view";
+      
+      router.push("/cute-timetable/view");
+      // window.location.href = "/cute-timetable/view";
     } else {
       setIsError(true);
       setErrorMessage("No file selected");
@@ -65,7 +68,7 @@ const CsvTimetableUploader = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center my-10 min-h-[50vh]">
+    <div className="flex flex-col items-center justify-center my-10 min-h-[50vh] text-center">
       <h1 className="text-2xl font-semibold mb-4 text-pink-600">
         Upload Your CSV Timetable
       </h1>
@@ -124,16 +127,29 @@ const CsvTimetableUploader = () => {
           ? "Upload CSV Now \u2191"
           : "Choose a file to upload"}
       </button>
-
+      <p className="text-sm  mt-10">
+        Click this link for instructions on how to get your CSV timetable
+      </p>
       <Link
         href="/cute-timetable/how-to-use"
-        className="underline mt-10 text-pink-600 hover:underline hover:text-pink-700 capitalize font-semibold transition duration-300"
+        className="underline text-pink-600 hover:underline hover:text-pink-700 capitalize font-semibold transition duration-300"
       >
         How to get your CSV timetable?
       </Link>
-      <p className="text-sm">
-        Click this link if you haven't downloaded your CSV file yet
-      </p>
+
+      {timetableCsv && (
+  <div className="mt-6 max-w-[90vw] bg-pink-100 border border-pink-300 rounded p-4">
+    <p className="text-sm mb-2 text-pink-600">
+      🎀 You already have a cute timetable uploaded. Click the button below to view it! 📅
+    </p>
+    <Link href="/cute-timetable/view">
+      <button className="py-2 px-4 rounded font-semibold bg-pink-600 hover:bg-pink-700 text-white">
+        View Timetable
+      </button>
+    </Link>
+  </div>
+)}
+
     </div>
   );
 };
