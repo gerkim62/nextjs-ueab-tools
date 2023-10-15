@@ -121,7 +121,7 @@ export const Sidebar = () => {
               </MenuItem>
               <MenuItem
                 onClick={() => setSidebarShowing(false)}
-                component={<Link href={"/cute-timetable"}></Link>}
+                component={<Link href={"/cute-timetable/view"}></Link>}
                 icon={<FaListUl className="text-pink-600" />}
               >
                 View timetable

@@ -1,6 +1,8 @@
 "use client";
 import toast, { Toaster } from "react-hot-toast";
 
+import {relativeTimeFromDates} from "/lib/relativeTimeFromDates"
+
 import CoursesPicker from "../components/CoursesPicker";
 import Loading from "../components/Loading";
 import useFetch from "../hooks/useFetch";
@@ -10,6 +12,7 @@ import useLocalStorage from "../hooks/useLocalStorage";
 import { useSession } from "next-auth/react";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 // import { CoursesPicker } from "../components/CoursesPicker";
 
 const ExamTimetable = () => {
@@ -23,17 +26,39 @@ const ExamTimetable = () => {
     "selectedExamCourseIds",
     []
   );
+
+  const formatDate = (date: Date) => {
+    return date.toLocaleDateString("en-GB", {
+     
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  }
+
   const [allExamCourses, setAllExamCourses] = useState([]);
 
-  //for storing the current course in which uyser is selecting the option for
+  //for storing the current course in which uyser is selecting the option for bbbbbbbbbbb
   const [selectingOptionFor, setSelectingOptionFor] = useLocalStorage(
     "selectingOptionFor",
     ""
   );
+  const [isExpired, setIsExpired] = useState(false);
+  const [timetableName, setTimetableName] = useState("Final Exam Timetable"); // Change the initial value as needed
+  const [semester, setSemester] = useState("Spring 2023"); // Change the initial value as needed
+  const [expiryDate, setExpiryDate] = useState(new Date()); // Change the initial value as needed
+  const [releaseDate, setReleaseDate] = useState(new Date()); // Change the initial value as needed
+
   const shakingDurationInMs = 500;
 
   const noCourseSelected = () =>
     toast.error("Please select at least one course.", {});
+
+  const expiredTimetable = (semester: string) =>
+    toast.error(
+      `This timetable is for the ${semester} semester. See the instructions for updating it.`,
+      {}
+    );
 
   const isShaking = false;
   //use the useFetch hook to fetch the exam timetable
@@ -47,7 +72,32 @@ const ExamTimetable = () => {
   useEffect(() => {
     if (examTimetable) {
       console.log(examTimetable, ` from effect`);
-      const courses = getCourses((examTimetable as any).timetable);
+      const timetable = (examTimetable as any).timetable;
+
+      const startDateStr: string = timetable.pages[0].courses[0].date;
+      const endDateStr: string =
+        timetable.pages[timetable.pages.length - 1].courses[
+          timetable.pages[timetable.pages.length - 1].courses.length - 1
+        ].date;
+
+      const startDate = new Date(startDateStr);
+      const endDate = new Date(endDateStr);
+      const semester = timetable.semester;
+      setSemester(semester);
+      setTimetableName(timetable.name);
+      setExpiryDate((endDate));
+      setReleaseDate((new Date(timetable.releaseDate)));
+
+      //check if the exam timetable is for the current semester
+      const today = new Date();
+      if (today > endDate || today < startDate) {
+        expiredTimetable(semester);
+        setIsExpired(true);
+      }
+
+      console.log(startDate, endDate, `start and end date`);
+
+      const courses = getCourses(timetable);
       setAllExamCourses(courses as any);
     }
   }, [examTimetable]);
@@ -60,6 +110,14 @@ const ExamTimetable = () => {
   };
 
   const handleCoursesSubmit = async () => {
+    if(isExpired){
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        text: "This timetable is not up-to-date.",
+      }); 
+   
+    }
     setExtractingExamTimetable(true);
     if (selectedExamCourseIds.length <= 0) {
       setExtractingExamTimetable(false);
@@ -88,9 +146,7 @@ const ExamTimetable = () => {
 
       setSelectedExamCourses(selected);
       router.push("/exam-timetable/extracted");
-      
     }
-   
   };
 
   // Function to display the course selection prompt and return the selected course object
@@ -102,6 +158,9 @@ const ExamTimetable = () => {
       const title = `${courses[0].title} - ${courses[0].code}`;
 
       Swal.fire({
+        allowOutsideClick: false, // Disable closing by clicking outside
+        allowEscapeKey: false, // Disable closing by pressing escape key
+        showCloseButton: false, // Disable the "Close" button in the header
         title: `${courses[0].code}`,
         text: `Select your option for ${title}`,
         input: "select",
@@ -109,7 +168,7 @@ const ExamTimetable = () => {
           {},
           ...optionLabels.map((label, index) => ({ [index]: label }))
         ),
-        inputPlaceholder: "Click to select",
+        inputPlaceholder: "Click to select an option",
         inputValidator: (value) => {
           if (value === "") {
             return "You must select an option";
@@ -128,7 +187,7 @@ const ExamTimetable = () => {
   }
 
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full max-w-[90%]">
       {error && (
         <div className="bg-white text-pink-500 p-4 rounded-lg">
           <div className="text-red-500">
@@ -142,7 +201,6 @@ const ExamTimetable = () => {
           </button>
         </div>
       )}
-
       {loading && <Loading />}
       {allExamCourses.length > 0 && (
         <div className=" flex flex-col flex-wrap items-center gap-1 mt-12 max-w-md mx-auto text-center">
@@ -182,6 +240,37 @@ const ExamTimetable = () => {
           </button>
         </div>
       )}
+      <div className="bg-white rounded-lg p-4">
+        {(isExpired && !loading) ? (
+          <div className="text-center text-pink-600">
+            
+            <p className="text-sm text-gray-600 mb-1">
+              Expired timetable: <br/>
+            The {timetableName} for {semester} <span className="font-bold"> expired {relativeTimeFromDates(expiryDate)}</span> .
+            </p>
+            <p className="text-sm text-gray-600">
+              It was released on {relativeTimeFromDates(releaseDate)}.
+            </p>
+            <a
+              href="/exam-timetable/update"
+              className="text-pink-700 underline hover:no-underline"
+            >
+              Click here to update it
+            </a>
+          </div>
+        ) : (
+          <div className="text-center text-pink-600">
+            
+            <p className="text-sm text-gray-600 mb-4">
+              You are viewing <br/> The {timetableName} for {semester}.
+            </p>
+            {/* <p className="text-sm text-gray-600">
+              It was released on {relativeTimeFromDates(releaseDate)}.
+            </p> */}
+          </div>
+        )}
+      </div>
+      );
     </div>
   );
 };

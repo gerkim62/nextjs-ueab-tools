@@ -100,6 +100,8 @@ export function getCurrentCourses({ timestamp, dayName, courses }) {
       hour.toString().padStart(2, "0") + ":" + minute.toString().padStart(2, "0")
     );
   }
+
+ 
   
   // Example usage:
   // var timeRanges = [

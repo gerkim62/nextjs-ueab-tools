@@ -9,7 +9,7 @@ const useIsLgScreen = () => {
   );
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia(
+    const mediaQuery = window?.matchMedia(
       `(min-width: ${LG_SCREEN_BREAKPOINT}px)`
     );
 

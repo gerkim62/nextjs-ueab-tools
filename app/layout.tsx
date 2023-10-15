@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} flex flex-col min-h-screen w-[100vw] overflow-x-hidden`}
+        className={`${inter.className} flex flex-col min-h-screen w-[100vw]`}
         style={{ display: "flex", flexDirection: "column" }}
       >
         <div className="flex flex-grow w-[100vw] ">

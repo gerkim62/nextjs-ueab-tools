@@ -44,24 +44,14 @@ const ViewExtracted = () => {
   console.log({ selectedExamCourses });
 
   return selectedExamCourses.length > 0 ? (
-    <div className="mt-14 lg:mt-0">
+    <div className="mt-14 lg:mt-0 mx-auto w-[100vw] lg:w-[80vw]">
       <Timetable
         ref={ref}
         setShowingPropertiesFor={setShowingPropertiesFor}
         showingPropertiesFor={selectedExamCourses[0]}
-        prefferedCoursesIdentifier="code"
         courses={formatSelectedCourses(selectedExamCourses)}
       />
-      <div className="">
-        <Link
-          href="/exam-timetable"
-          className="text-pink-500 hover:text-pink-700 transition duration-300 ease-in-out flex items-center space-x-2"
-        >
-          <span>Update</span>
-          <FaEdit className="text-lg" />
-        </Link>
-        <button onClick={toggle}>Fullscreen</button>
-      </div>
+
       {showingPropertiesFor && (
         <div
           onClick={() => setShowingPropertiesFor(undefined)}
