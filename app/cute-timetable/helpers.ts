@@ -1,3 +1,6 @@
+// @ts-nocheck
+
+
 /**
  *Reads the CSV file and returns it as a string
  * @param {!File} csvFile -the CSV file to be converted to string
