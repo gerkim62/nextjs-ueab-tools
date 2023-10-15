@@ -109,7 +109,7 @@ const ExamTimetable = () => {
       const courses = getCourses(timetable);
       setAllExamCourses(courses as any);
     }
-  }, [examTimetable]);
+  }, [examTimetable, setAllExamCourses]);
 
   const handCourseChange = (newValue: unknown, actionMeta: any) => {
     console.log(newValue);

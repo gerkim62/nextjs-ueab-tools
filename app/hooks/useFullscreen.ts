@@ -113,7 +113,7 @@ export function useFullscreen<T extends HTMLElement = any>() {
     }
 
     return undefined;
-  }, []);
+  }, [handleFullscreenChange, handleFullscreenError]);
 
   return { ref, toggle, fullscreen } as const;
 }
