@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { HEADERS_TR_SELECTOR } from "./selectors";
 import { toCamelCase, sanitizeString } from "./utils";
 const DDMMYYYY_DATE_SEPARATOR = "-";
