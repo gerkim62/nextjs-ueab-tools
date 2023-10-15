@@ -15,7 +15,7 @@ const CoursesPicker = ({
   onCoursesChange,
 }: CoursesPickerProps) => {
   const [isPending, startTransition] = useTransition();
-  const selectRef = ref || useRef(null);
+  const selectRef = ref;
   const isPickerDisabled = false;
   const displayedProperty: "code" | "title" = "code";
   const options = isPending

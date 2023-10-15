@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { FaHtml5, FaCss3, FaJs, FaReact, FaBootstrap, FaNodeJs, FaWhatsapp, FaEnvelope, FaLinkedin } from 'react-icons/fa';
 import { SiNextdotjs, SiMongodb } from 'react-icons/si';
 import Logo from '../components/Logo';
+import Image from 'next/image';
 
 const AboutMe = () => {
   return (
@@ -9,7 +10,7 @@ const AboutMe = () => {
       <div className="max-w-screen-lg mx-auto flex flex-col lg:flex-row items-center justify-center space-y-6 lg:space-y-0">
         <div className="relative flex-shrink-0 w-40 h-40 lg:w-48 lg:h-48">
           <div className="absolute -inset-2 bg-pink-500 rounded-full" />
-          <img
+          <Image
             src="your_profile_pic_url.jpg"
             alt="Profile Pic"
             className="w-full h-full rounded-full object-cover ring-4 ring-pink-500"
